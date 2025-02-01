@@ -1,3 +1,10 @@
 # Creating an overlay over a container
 
 sudo lxc-copy --name base --newname fork --snapshot --backingstorage overlay
+
+Work process:
+* The runner (the one that reads the Cockerfile) receives the desired container name along with the path to the Cockerfile
+* The runner retrieves the base container name from the Cockerfile's base builder executable (through its stdout)
+* The runner creates a child container (overlayfs) from the base (name: "${desired container name}-layer{N}")
+* The runner passes that container in an env var to the script
+* The container is being created with the name "${desired container name}" from the last layer
