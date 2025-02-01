@@ -1,3 +1,17 @@
-/path/to/base_builder.sh # Receives nothing, produces the base container name through stdout
-layers/1.sh # Receives the layer name, just has to set it up
-layers/2.sh # Same as layer 1
+BASEBUILDER
+> %COMMAND%
+BASENAME
+> %STRING%
+RUN
+> %COMMAND%
+> %COMMAND%
+> %COMMAND%
+RUN
+> %COMMAND%
+> %COMMAND%
+> %COMMAND%
+COPY
+> %SRC%
+> %SRC%
+> %SRC%
+> %DEST%
