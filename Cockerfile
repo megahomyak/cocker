@@ -1,0 +1,3 @@
+/path/to/base_builder.sh # Receives nothing, produces the base container name through stdout
+layers/1.sh # Receives the layer name, just has to set it up
+layers/2.sh # Same as layer 1

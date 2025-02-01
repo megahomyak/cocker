@@ -1,0 +1,3 @@
+# Creating an overlay over a container
+
+sudo lxc-copy --name base --newname fork --snapshot --backingstorage overlay
