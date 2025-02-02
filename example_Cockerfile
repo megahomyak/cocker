@@ -1,16 +1,12 @@
+COCKERFILE v1
 SOURCE
 > %COMMAND%
 > echo %BASENAME%
-RUN
+LAYER
 > %COMMAND {layer} - the name of the current layer%
 > %COMMAND%
 > %COMMAND%
-RUN
+LAYER
 > %COMMAND%
 > %COMMAND%
 > %COMMAND%
-COPY
-> %SRC%
-> %SRC%
-> %SRC%
-> %DEST%
