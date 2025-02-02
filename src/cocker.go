@@ -7,19 +7,21 @@ import (
 )
 
 /*
-Read the file by lines
-Parse lines into array[command]
-Execute the commands one by one, passing the new names forward, switching layers
-*/
+
+ */
 
 type command struct {
     name, contents string
 }
 
+func executeSource(source string) string {
+
+}
+
 func main() {
     data, err := os.ReadFile("Cockerfile")
     if err != nil {
-        log.Fatal(err)
+        log.Fatalln(err)
     }
 
     lines := strings.Split(string(data), "\n")
@@ -33,7 +35,7 @@ func main() {
         contentLine, isSuccess := strings.CutPrefix(line, ">")
         if isSuccess {
             if len(commands) == 0 {
-                log.Fatal("Contents of a command should come after the name of the command")
+                log.Fatalln("Contents of a command should come after the name of the command")
             }
             if commands[len(commands) - 1].contents != "" {
                 commands[len(commands) - 1].contents += "\n"
@@ -47,11 +49,22 @@ func main() {
 
     i := 0
     if len(commands) <= i || commands[i].name != "COCKERFILE v1" || commands[i].contents != "" {
-        log.Fatal("The first line of the Cockerfile should be its heading without any content lines")
+        log.Fatalln("The first line of the Cockerfile should be its heading without any content lines")
     }
     i++
     if len(commands) <= i || commands[i].name != "SOURCE" {
-        log.Fatal("The first command should be SOURCE")
+        log.Fatalln("The first command should be SOURCE")
     }
+    currentContainerName := executeSource(commands[i].contents)
     i++
+    for _, command := range commands[i:] {
+        switch command.name {
+        case "LAYER":
+            // Create new container layer from currentContainerName
+            // Execute the commands
+        default:
+            log.Fatalf("Unknown command name: \"%s\"\n", command.name)
+        }
+    }
+    // Create final ("live") container with the specified name
 }
